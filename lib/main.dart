@@ -1,9 +1,5 @@
-import 'package:expense_tracker/widgets/transaction_form.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:expense_tracker/widgets/transaction_container.dart';
 import 'package:flutter/material.dart';
-
-import 'models/transaction.dart';
-import 'widgets/transaction_list.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,13 +14,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Transaction> transactions = [
-    Transaction(
-        id: "1", title: "New Shoes", amount: 69.99, date: DateTime.now()),
-    Transaction(
-        id: "2", title: "New Milk", amount: 1000.99, date: DateTime.now()),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,12 +31,7 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          TransactionForm(onSubmit: (transaction) {
-            print(transaction);
-          }),
-          TransactionList(
-            transactions: transactions,
-          )
+          TransactionsContainer()
         ],
       ),
     );

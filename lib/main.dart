@@ -1,3 +1,5 @@
+import 'package:expense_tracker/widgets/transaction_form.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'models/transaction.dart';
@@ -18,17 +20,9 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   final List<Transaction> transactions = [
     Transaction(
-        id: "1",
-        title: "New Shoes",
-        amount: 69.99,
-        date: DateTime.now()
-    ),
+        id: "1", title: "New Shoes", amount: 69.99, date: DateTime.now()),
     Transaction(
-        id: "2",
-        title: "New Milk",
-        amount: 1000.99,
-        date: DateTime.now()
-    ),
+        id: "2", title: "New Milk", amount: 1000.99, date: DateTime.now()),
   ];
 
   @override
@@ -38,6 +32,7 @@ class MyHomePage extends StatelessWidget {
         title: Text('Flutter App'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
             width: double.infinity,
@@ -47,6 +42,9 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
+          TransactionForm(onSubmit: (transaction) {
+            print(transaction);
+          }),
           TransactionList(
             transactions: transactions,
           )
@@ -55,4 +53,3 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
-

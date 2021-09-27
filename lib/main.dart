@@ -1,4 +1,4 @@
-import 'package:expense_tracker/widgets/transaction_container.dart';
+import 'package:expense_tracker/widgets/transactions_container.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());

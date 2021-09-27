@@ -21,7 +21,9 @@ class _TransactionsContainerState extends State<TransactionsContainer> {
     return Column(
       children: [
         TransactionForm(onSubmit: (transaction) {
-          print(transaction);
+          setState(() {
+            _transactions.add(transaction);
+          });
         }),
         TransactionList(
           transactions: _transactions,

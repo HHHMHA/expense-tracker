@@ -36,7 +36,7 @@ class TransactionForm extends StatelessWidget {
                     title: titleController.text,
                     amount: double.parse(amountController.text),
                     date: DateTime.now(),
-                    id: '1',
+                    id: DateTime.now().toString(),
                   );
                   onSubmit!(transaction);
                 },

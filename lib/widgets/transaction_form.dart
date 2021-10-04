@@ -35,7 +35,7 @@ class TransactionForm extends StatelessWidget {
               TextButton(
                 onPressed: submitData,
                 child: Text(
-                  'Add TransactionList',
+                  'Add Transaction',
                   style: TextStyle(
                     color: Colors.purple,
                   ),

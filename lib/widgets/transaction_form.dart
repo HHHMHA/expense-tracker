@@ -26,20 +26,14 @@ class TransactionForm extends StatelessWidget {
               ),
               TextField(
                 controller: amountController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
                 decoration: InputDecoration(
                   labelText: 'Amount',
                 ),
+                onSubmitted: (_) => submitData(),
               ),
               TextButton(
-                onPressed: () {
-                  Transaction transaction = Transaction(
-                    title: titleController.text,
-                    amount: double.parse(amountController.text),
-                    date: DateTime.now(),
-                    id: DateTime.now().toString(),
-                  );
-                  onSubmit!(transaction);
-                },
+                onPressed: submitData,
                 child: Text(
                   'Add TransactionList',
                   style: TextStyle(
@@ -50,5 +44,29 @@ class TransactionForm extends StatelessWidget {
             ],
           ),
         ));
+  }
+
+  void submitData() {
+    final enteredTitle = titleController.text;
+    final enteredAmount = double.parse(amountController.text);
+
+    if (invalidInput()) {
+      return;
+    }
+
+    Transaction transaction = Transaction(
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: DateTime.now(),
+      id: DateTime.now().toString(),
+    );
+    onSubmit!(transaction);
+  }
+
+  bool invalidInput() {
+    final enteredTitle = titleController.text;
+    final enteredAmount = double.parse(amountController.text);
+
+    return enteredTitle.isEmpty || enteredAmount <= 0;
   }
 }

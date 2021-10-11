@@ -2,12 +2,18 @@
 import 'package:expense_tracker/models/transaction.dart';
 import 'package:flutter/material.dart';
 
-class TransactionForm extends StatelessWidget {
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController amountController = TextEditingController();
+class TransactionForm extends StatefulWidget {
   final void Function(Transaction transaction)? onSubmit;
 
   TransactionForm({required this.onSubmit});
+
+  @override
+  _TransactionFormState createState() => _TransactionFormState();
+}
+
+class _TransactionFormState extends State<TransactionForm> {
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +66,10 @@ class TransactionForm extends StatelessWidget {
       date: DateTime.now(),
       id: DateTime.now().toString(),
     );
-    onSubmit!(transaction);
+
+    widget.onSubmit!(transaction);
+
+    Navigator.of(context).pop();
   }
 
   bool invalidInput() {

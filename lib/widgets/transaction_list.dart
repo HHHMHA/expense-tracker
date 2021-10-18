@@ -1,3 +1,4 @@
+import 'package:expense_tracker/common/constants.dart';
 import 'package:expense_tracker/models/transaction.dart';
 import 'package:expense_tracker/widgets/transaction_widget.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: Styles.transactionListContainerHeight,
       child: Conditional.single(
         context: context,
         conditionBuilder: (context) => transactions.isNotEmpty,
@@ -26,16 +27,16 @@ class TransactionList extends StatelessWidget {
         fallbackBuilder: (context) => Column(
           children: [
             Text(
-              'No transactions added yet',
+              Messages.noTransactionsMessage,
               style: Theme.of(context).textTheme.headline6,
             ),
             SizedBox(
-              height: 20,
+              height: Styles.sizedBoxHeight,
             ),
             Container(
-              height: 200,
+              height: Styles.noTransactionsImageHeight,
               child: Image.asset(
-                'assets/images/waiting.png',
+                Images.waitingImage,
                 fit: BoxFit.cover,
               ),
             ),

@@ -3,6 +3,7 @@ import 'package:expense_tracker/widgets/transaction_form.dart';
 import 'package:expense_tracker/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
 
+import 'common/constants.dart';
 import 'common/themes.dart';
 
 void main() => runApp(MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Personal Expenses',
+      title: Constants.appTitle,
       theme: Themes.mainTheme,
       home: MyHomePage(),
     );
@@ -36,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Personal Expenses',
+          Constants.appTitle,
         ),
         actions: [
           IconButton(
@@ -54,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Card(
                 color: Colors.blue,
                 child: Text('CHART!'),
-                elevation: 5,
+                elevation: Styles.chartCardElevation,
               ),
             ),
             TransactionList(

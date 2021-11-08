@@ -1,6 +1,8 @@
 class Constants {
   static const appTitle = "Personal Expenses";
   static const defaultPrecession = 2;
+  static const DAYS_IN_WEEK = 7;
+  static const RECENT_TRANSACTIONS_NUMBER = DAYS_IN_WEEK;
 }
 
 class Styles {

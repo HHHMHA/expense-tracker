@@ -38,6 +38,23 @@ class _TransactionFormState extends State<TransactionForm> {
                 ),
                 onSubmitted: (_) => submitData(),
               ),
+              Row(
+                children: [
+                  Text(
+                    'No Date Chosen!',
+                  ),
+                  TextButton(
+                    child: Text(
+                      'Choose Date',
+                      style: TextStyle(
+                        color: Colors.purple,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
               TextButton(
                 onPressed: submitData,
                 child: Text(

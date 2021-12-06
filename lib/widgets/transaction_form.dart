@@ -1,6 +1,7 @@
 // TODO: allow passing a transaction so we can update it
 import 'package:expense_tracker/models/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TransactionForm extends StatefulWidget {
   final void Function(Transaction transaction)? onSubmit;
@@ -12,8 +13,15 @@ class TransactionForm extends StatefulWidget {
 }
 
 class _TransactionFormState extends State<TransactionForm> {
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController amountController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
+  DateTime? _selectedDate;
+
+  String get _selectedDatePrompt {
+    return _selectedDate == null
+        ? 'No Date Chosen!'
+        : DateFormat.yMd().format(_selectedDate!);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,23 +33,25 @@ class _TransactionFormState extends State<TransactionForm> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               TextField(
-                controller: titleController,
+                controller: _titleController,
                 decoration: InputDecoration(
                   labelText: 'Title',
                 ),
               ),
               TextField(
-                controller: amountController,
+                controller: _amountController,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
                 decoration: InputDecoration(
                   labelText: 'Amount',
                 ),
-                onSubmitted: (_) => submitData(),
+                onSubmitted: (_) => _submitData(),
               ),
               Row(
                 children: [
-                  Text(
-                    'No Date Chosen!',
+                  Expanded(
+                    child: Text(
+                      _selectedDatePrompt,
+                    ),
                   ),
                   TextButton(
                     child: Text(
@@ -51,12 +61,12 @@ class _TransactionFormState extends State<TransactionForm> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: _showDataPicker,
                   ),
                 ],
               ),
               TextButton(
-                onPressed: submitData,
+                onPressed: _submitData,
                 child: Text(
                   'Add Transaction',
                   style: TextStyle(
@@ -69,11 +79,11 @@ class _TransactionFormState extends State<TransactionForm> {
         ));
   }
 
-  void submitData() {
-    final enteredTitle = titleController.text;
-    final enteredAmount = double.parse(amountController.text);
+  void _submitData() {
+    final enteredTitle = _titleController.text;
+    final enteredAmount = double.parse(_amountController.text);
 
-    if (invalidInput()) {
+    if (_invalidInput()) {
       return;
     }
 
@@ -89,10 +99,24 @@ class _TransactionFormState extends State<TransactionForm> {
     Navigator.of(context).pop();
   }
 
-  bool invalidInput() {
-    final enteredTitle = titleController.text;
-    final enteredAmount = double.parse(amountController.text);
+  bool _invalidInput() {
+    final enteredTitle = _titleController.text;
+    final enteredAmount = double.parse(_amountController.text);
 
     return enteredTitle.isEmpty || enteredAmount <= 0;
+  }
+
+  void _showDataPicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2019),
+      lastDate: DateTime.now(),
+    ).then((value) {
+      if (value == null) return;
+      setState(() {
+        _selectedDate = value;
+      });
+    });
   }
 }

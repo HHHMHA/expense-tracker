@@ -6,8 +6,10 @@ import 'package:flutter_conditional_rendering/conditional.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
+  final void Function(String id) deleteHandler;
 
-  const TransactionList({required this.transactions});
+  const TransactionList(
+      {required this.transactions, required this.deleteHandler});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class TransactionList extends StatelessWidget {
           itemBuilder: (ctx, index) {
             return TransactionWidget(
               transaction: transactions[index],
+              deleteHandler: deleteHandler,
             );
           },
           itemCount: transactions.length,

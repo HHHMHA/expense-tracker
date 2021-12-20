@@ -76,6 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             TransactionList(
               transactions: _transactions,
+              deleteHandler: _deleteTransaction,
             )
           ],
         ),
@@ -102,5 +103,9 @@ class _MyHomePageState extends State<MyHomePage> {
             }),
           );
         });
+  }
+
+  void _deleteTransaction(String id) {
+    setState(() => _transactions.removeWhere((element) => element.id == id));
   }
 }

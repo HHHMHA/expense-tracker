@@ -5,9 +5,11 @@ import 'package:intl/intl.dart';
 
 class TransactionWidget extends StatelessWidget {
   final Transaction transaction;
+  final void Function(String id) deleteHandler;
 
   const TransactionWidget({
     required this.transaction,
+    required this.deleteHandler,
   });
 
   @override
@@ -38,6 +40,11 @@ class TransactionWidget extends StatelessWidget {
           DateFormat.yMMMd().format(
             transaction.date,
           ),
+        ),
+        trailing: IconButton(
+          icon: Icon(Icons.delete),
+          color: Theme.of(context).errorColor,
+          onPressed: () => deleteHandler(transaction.id),
         ),
       ),
     );

@@ -80,17 +80,17 @@ class _TransactionFormState extends State<TransactionForm> {
   }
 
   void _submitData() {
-    final enteredTitle = _titleController.text;
-    final enteredAmount = double.parse(_amountController.text);
-
     if (_invalidInput()) {
       return;
     }
 
+    final enteredTitle = _titleController.text;
+    final enteredAmount = double.parse(_amountController.text);
+
     Transaction transaction = Transaction(
       title: enteredTitle,
       amount: enteredAmount,
-      date: DateTime.now(),
+      date: _selectedDate!,
       id: DateTime.now().toString(),
     );
 
@@ -101,9 +101,9 @@ class _TransactionFormState extends State<TransactionForm> {
 
   bool _invalidInput() {
     final enteredTitle = _titleController.text;
-    final enteredAmount = double.parse(_amountController.text);
+    final enteredAmount = double.tryParse(_amountController.text);
 
-    return enteredTitle.isEmpty || enteredAmount <= 0;
+    return enteredTitle.isEmpty || enteredAmount! <= 0 || _selectedDate == null;
   }
 
   void _showDataPicker() {
